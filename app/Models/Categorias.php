@@ -10,4 +10,8 @@ class Categorias extends Model
     use HasFactory;
     protected $fillable = ['categoria'];
 
+    public function activos()
+    {
+        return $this->hasMany(Activo::class, 'categorias_id');
+    }
 }

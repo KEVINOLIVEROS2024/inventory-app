@@ -9,4 +9,9 @@ class Proveedores extends Model
 {
     use HasFactory;
     protected $fillable = ['proveedor', 'direccion', 'telefono', 'correo', 'paginaweb'];
+
+    public function activos()
+    {
+        return $this->hasMany(Activo::class, 'proveedores_id');
+    }
 }

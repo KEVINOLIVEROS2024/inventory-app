@@ -14,23 +14,24 @@ return new class extends Migration
         Schema::create('activos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_de_activo');
-            $table->biginteger('numero_activo');
-            $table->text('serial_activo');
-            $table->text('marca');
-            $table->text('modelo');
+            $table->string('numero_activo');
+            $table->string('serial_activo');
+            $table->string('marca');
+            $table->string('modelo');
             $table->date('fecha_lanzamiento');
             $table->date('fecha_compra');
-            $table->biginteger('valor');
-            $table->text('estado');
+            $table->decimal('valor', 15, 2);
+            $table->string('estado');
             $table->foreignId('sedes_id')->constrained()->onDelete('cascade');
             $table->foreignId('ubicaciones_id')->constrained()->onDelete('cascade');
             $table->foreignId('sububicaciones_id')->constrained()->onDelete('cascade');
             $table->foreignId('users_id')->constrained()->onDelete('cascade');
             $table->foreignId('categorias_id')->constrained()->onDelete('cascade');
             $table->foreignId('proveedores_id')->constrained()->onDelete('cascade');
-            $table->date('garantia');
-            $table->text('notas_activos');
+            $table->date('garantia')->nullable();
+            $table->text('notas_activos')->nullable();
             $table->timestamps();
+          
         });
     }
 

@@ -30,30 +30,31 @@ class Activos extends Model
 
     public function sede()
     {
-        return $this->belongsTo(Sedes::class);
+        return $this->belongsTo(Sedes::class, 'sedes_id');
     }
 
     public function ubicacion()
     {
-        return $this->belongsTo(Ubicaciones::class);
+        return $this->belongsTo(Ubicaciones::class, 'ubicaciones_id');
     }
 
     public function sububicacion()
     {
-        return $this->belongsTo(Sububicaciones::class);
+        return $this->belongsTo(Sububicaciones::class, 'sububicaciones_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function categoria()
     {
-        return $this->belongsTo(Categorias::class);
+        return $this->belongsTo(Categorias::class, 'categorias_id');
     }
 
     public function proveedor()
     {
-        return $this->belongsTo(Proveedores::class);
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Proveedores::class, 'proveedores_id');
     }
 }

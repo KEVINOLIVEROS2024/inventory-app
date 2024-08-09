@@ -23,36 +23,42 @@ class ActivosResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('tipo_de_activo')
+                ->required(),
+            Forms\Components\TextInput::make('numero_activo')
+                ->unique()
+                ->required(),
+            Forms\Components\TextInput::make('serial_activo')
+                ->unique()
+                ->required(),
+            Forms\Components\TextInput::make('marca')
+                ->required(),
+            Forms\Components\TextInput::make('modelo')
+                ->required(),
+            Forms\Components\DatePicker::make('fecha_lanzamiento')
+                ->required(),
+            Forms\Components\DatePicker::make('fecha_compra')
+                ->required(),
+            Forms\Components\TextInput::make('valor')
+                ->numeric()
+                ->required(),
+            Forms\Components\TextInput::make('estado')
+                ->required(),
+            Forms\Components\Select::make('sedes_id')
+                ->relationship('sede', 'sede'),
+            Forms\Components\Select::make('ubicaciones_id')
+                ->relationship('ubicacion', 'ubicacion'),
+            Forms\Components\Select::make('sububicaciones_id')
+                ->relationship('sububicacion', 'sububicacion'),
+            Forms\Components\Select::make('users_id')
+                ->relationship('user', 'name'),
+            Forms\Components\Select::make('categorias_id')
+                ->relationship('categoria', 'categoria'),
+            Forms\Components\Select::make('proveedores_id')
+                ->relationship('proveedor', 'proveedor'),
+            Forms\Components\DatePicker::make('garantia'),
+            Forms\Components\Textarea::make('notas_activos'),
             
-                Forms\Components\TextInput::make('tipo_de_activo')->required(),
-                Forms\Components\TextInput::make('numero_activo')->numeric()->required(),
-                Forms\Components\Textarea::make('serial_activo')->required(),
-                Forms\Components\Textarea::make('marca')->required(),
-                Forms\Components\Textarea::make('modelo')->required(),
-                Forms\Components\DatePicker::make('fecha_lanzamiento')->required(),
-                Forms\Components\DatePicker::make('fecha_compra')->required(),
-                Forms\Components\TextInput::make('valor')->numeric()->required(),
-                Forms\Components\Textarea::make('estado')->required(),
-                Forms\Components\Select::make('sedes_id')
-                    ->relationship('sede', 'sede')
-                    ->required(), 
-                Forms\Components\Select::make('ubicaciones_id')
-                    ->relationship('ubicacion', 'ubicacion')
-                    ->required(),
-                Forms\Components\Select::make('sububicaciones_id')
-                    ->relationship('sububicacion', 'sububicacion')
-                    ->required(),
-                Forms\Components\Select::make('users_id')
-                    ->relationship('user', 'name')
-                   ->required(),
-                Forms\Components\Select::make('categorias_id')
-                    ->relationship('categoria', 'categoria')
-                   ->required(),
-                Forms\Components\Select::make('proveedores_id')
-                    ->relationship('proveedore', 'proveedor')
-                    ->required(),
-                Forms\Components\DatePicker::make('garantia')->required(),
-                Forms\Components\Textarea::make('notas_activos')->required(),
             ]);
     }
 
@@ -61,24 +67,23 @@ class ActivosResource extends Resource
         return $table
             ->columns([
                 //
-
                 Tables\Columns\TextColumn::make('tipo_de_activo'),
                 Tables\Columns\TextColumn::make('numero_activo'),
                 Tables\Columns\TextColumn::make('serial_activo'),
                 Tables\Columns\TextColumn::make('marca'),
                 Tables\Columns\TextColumn::make('modelo'),
-                Tables\Columns\TextColumn::make('fecha_compra')->date(),
+                Tables\Columns\TextColumn::make('fecha_lanzamiento'),
+                Tables\Columns\TextColumn::make('fecha_compra'),
                 Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\TextColumn::make('estado'),
-                Tables\Columns\TextColumn::make('sede.sede')->label('Sede'),
-                Tables\Columns\TextColumn::make('ubicacion.ubicacion')->label('Ubicación'),
-                Tables\Columns\TextColumn::make('sububicacion.sububicacion')->label('Sububicación'),
-                Tables\Columns\TextColumn::make('user.name')->label('Usuario'),
-                Tables\Columns\TextColumn::make('categoria.categoria')->label('Categoría'),
-                Tables\Columns\TextColumn::make('proveedor.proveedor')->label('Proveedor'),
-                Tables\Columns\TextColumn::make('garantia')->date(),
+                Tables\Columns\TextColumn::make('sede.sede'),
+                Tables\Columns\TextColumn::make('ubicacion.ubicacion'),
+                Tables\Columns\TextColumn::make('sububicacion.sububicacion'),
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('categoria.categoria'),
+                Tables\Columns\TextColumn::make('proveedor.proveedor'),
+                Tables\Columns\TextColumn::make('garantia'),
                 Tables\Columns\TextColumn::make('notas_activos'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->label('Fecha de Creación'),
 
             ])
             ->filters([
@@ -86,6 +91,7 @@ class ActivosResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

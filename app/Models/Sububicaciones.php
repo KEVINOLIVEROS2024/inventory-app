@@ -9,4 +9,8 @@ class Sububicaciones extends Model
 {
     use HasFactory;protected $fillable = ['sububicacion'];
 
+    public function activos()
+    {
+        return $this->hasMany(Activo::class, 'sububicaciones_id');
+    }
 }

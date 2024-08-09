@@ -44,5 +44,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function activos()
+    {
+        return $this->hasMany(Activo::class, 'users_id');
+    }   
     
 }

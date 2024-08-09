@@ -10,4 +10,8 @@ class Ubicaciones extends Model
     use HasFactory;
     protected $fillable = ['ubicacion'];
 
+    public function activos()
+    {
+        return $this->hasMany(Activo::class, 'ubicaciones_id');
+    }
 }
