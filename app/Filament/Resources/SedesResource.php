@@ -23,7 +23,17 @@ class SedesResource extends Resource
     {
         return $form
             ->schema([
+            
                 //
+                Forms\Components\TextInput::make('ciudad')
+                ->required(),
+            Forms\Components\TextInput::make('sede')
+                ->required(),
+            Forms\Components\TextInput::make('direccion')
+                ->required(),    
+                Forms\Components\TextInput::make('telefono')
+                ->required(), 
+              
             ]);
     }
 
@@ -32,6 +42,11 @@ class SedesResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('ciudad'),
+                Tables\Columns\TextColumn::make('sede'),
+                Tables\Columns\TextColumn::make('direccion'),
+                Tables\Columns\TextColumn::make('telefono'),
+          
             ])
             ->filters([
                 //

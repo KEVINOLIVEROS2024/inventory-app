@@ -18,20 +18,19 @@ return new class extends Migration
             $table->text('serial_activo');
             $table->text('marca');
             $table->text('modelo');
+            $table->date('fecha_lanzamiento');
             $table->date('fecha_compra');
             $table->biginteger('valor');
             $table->text('estado');
-            $table->foreignId('sede_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ubicacion_id')->constrained()->onDelete('cascade');
-            $table->foreignId('sububicacion_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('categoria_id')->constrained()->onDelete('cascade');
-            $table->foreignId('proveedor_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sedes_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ubicaciones_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sububicaciones_id')->constrained()->onDelete('cascade');
+            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('categorias_id')->constrained()->onDelete('cascade');
+            $table->foreignId('proveedores_id')->constrained()->onDelete('cascade');
             $table->date('garantia');
             $table->text('notas_activos');
             $table->timestamps();
-
-
         });
     }
 

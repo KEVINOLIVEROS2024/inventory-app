@@ -29,26 +29,27 @@ class ActivosResource extends Resource
                 Forms\Components\Textarea::make('serial_activo')->required(),
                 Forms\Components\Textarea::make('marca')->required(),
                 Forms\Components\Textarea::make('modelo')->required(),
+                Forms\Components\DatePicker::make('fecha_lanzamiento')->required(),
                 Forms\Components\DatePicker::make('fecha_compra')->required(),
                 Forms\Components\TextInput::make('valor')->numeric()->required(),
                 Forms\Components\Textarea::make('estado')->required(),
-                Forms\Components\Select::make('sede_id')
-                    ->relationship('sedes', 'sede')
+                Forms\Components\Select::make('sedes_id')
+                    ->relationship('sede', 'sede')
+                    ->required(), 
+                Forms\Components\Select::make('ubicaciones_id')
+                    ->relationship('ubicacion', 'ubicacion')
                     ->required(),
-                Forms\Components\Select::make('ubicacion_id')
-                    ->relationship('ubicaciones', 'ubicacion')
+                Forms\Components\Select::make('sububicaciones_id')
+                    ->relationship('sububicacion', 'sububicacion')
                     ->required(),
-                Forms\Components\Select::make('sububicacion_id')
-                    ->relationship('sububicaciones', 'sububicacion')
-                    ->required(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('users', 'name')
-                    ->required(),
-                Forms\Components\Select::make('categoria_id')
-                    ->relationship('categorias', 'categoria')
-                    ->required(),
-                Forms\Components\Select::make('proveedor_id')
-                    ->relationship('proveedores', 'proveedor')
+                Forms\Components\Select::make('users_id')
+                    ->relationship('user', 'name')
+                   ->required(),
+                Forms\Components\Select::make('categorias_id')
+                    ->relationship('categoria', 'categoria')
+                   ->required(),
+                Forms\Components\Select::make('proveedores_id')
+                    ->relationship('proveedore', 'proveedor')
                     ->required(),
                 Forms\Components\DatePicker::make('garantia')->required(),
                 Forms\Components\Textarea::make('notas_activos')->required(),
@@ -69,12 +70,12 @@ class ActivosResource extends Resource
                 Tables\Columns\TextColumn::make('fecha_compra')->date(),
                 Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\TextColumn::make('estado'),
-                Tables\Columns\TextColumn::make('sedes.sede')->label('Sede'),
-                Tables\Columns\TextColumn::make('ubicaciones.ubicacion')->label('Ubicación'),
-                Tables\Columns\TextColumn::make('sububicaciones.sububicacion')->label('Sububicación'),
-                Tables\Columns\TextColumn::make('users.name')->label('Usuario'),
-                Tables\Columns\TextColumn::make('categorias.categoria')->label('Categoría'),
-                Tables\Columns\TextColumn::make('proveedores.proveedor')->label('Proveedor'),
+                Tables\Columns\TextColumn::make('sede.sede')->label('Sede'),
+                Tables\Columns\TextColumn::make('ubicacion.ubicacion')->label('Ubicación'),
+                Tables\Columns\TextColumn::make('sububicacion.sububicacion')->label('Sububicación'),
+                Tables\Columns\TextColumn::make('user.name')->label('Usuario'),
+                Tables\Columns\TextColumn::make('categoria.categoria')->label('Categoría'),
+                Tables\Columns\TextColumn::make('proveedor.proveedor')->label('Proveedor'),
                 Tables\Columns\TextColumn::make('garantia')->date(),
                 Tables\Columns\TextColumn::make('notas_activos'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->label('Fecha de Creación'),

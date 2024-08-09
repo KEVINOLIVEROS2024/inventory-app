@@ -14,15 +14,16 @@ class Activos extends Model
         'serial_activo',
         'marca',
         'modelo',
+        'fecha_lanzamiento',
         'fecha_compra',
         'valor',
         'estado',
-        'sede_id',
-        'ubicacion_id',
-        'sububicacion_id',
-        'user_id',
-        'categoria_id',
-        'proveedor_id',
+        'sedes_id',
+        'ubicaciones_id',
+        'sububicaciones_id',
+        'users_id',
+        'categorias_id',
+        'proveedores_id',
         'garantia',
         'notas_activos',
     ];
@@ -50,5 +51,9 @@ class Activos extends Model
     public function proveedor()
     {
         return $this->belongsTo(Proveedores::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Sedes extends Model
 {
     use HasFactory;
-    protected $fillable = ['proveedor', 'direccion', 'telefono', 'correo', 'paginaweb'];
+    protected $fillable = ['ciudad', 'sede', 'direccion', 'telefono'];
 }

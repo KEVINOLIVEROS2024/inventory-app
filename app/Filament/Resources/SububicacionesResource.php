@@ -24,6 +24,8 @@ class SububicacionesResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('sububicacion')
+                ->required(),
             ]);
     }
 
@@ -32,6 +34,7 @@ class SububicacionesResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('sububicacion'),
             ])
             ->filters([
                 //

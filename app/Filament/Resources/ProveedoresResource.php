@@ -24,6 +24,16 @@ class ProveedoresResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('proveedor')
+                ->required(),
+            Forms\Components\TextInput::make('direccion')
+                ->required(),
+            Forms\Components\TextInput::make('telefono')
+                ->required(),    
+                Forms\Components\TextInput::make('correo')
+                ->required(), 
+                Forms\Components\TextInput::make('paginaweb')
+                ->required(), 
             ]);
     }
 
@@ -32,6 +42,11 @@ class ProveedoresResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('proveedor'),
+                Tables\Columns\TextColumn::make('direccion'),
+                Tables\Columns\TextColumn::make('telefono'),
+                Tables\Columns\TextColumn::make('correo'),
+                Tables\Columns\TextColumn::make('paginaweb'),
             ])
             ->filters([
                 //

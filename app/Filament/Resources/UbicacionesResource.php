@@ -24,6 +24,8 @@ class UbicacionesResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('ubicacion')
+                ->required(),
             ]);
     }
 
@@ -31,7 +33,9 @@ class UbicacionesResource extends Resource
     {
         return $table
             ->columns([
+
                 //
+                Tables\Columns\TextColumn::make('ubicacion'),
             ])
             ->filters([
                 //

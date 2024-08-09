@@ -24,6 +24,8 @@ class CategoriasResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('categoria')
+                ->required(),
             ]);
     }
 
@@ -32,6 +34,7 @@ class CategoriasResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('categoria'),
             ])
             ->filters([
                 //
