@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('sububicaciones', function (Blueprint $table) {
             $table->id();
             $table->string('sububicacion');
+            $table->foreignId('ubicacion_id')->constrained('ubicaciones')->onDelete('cascade'); // Clave foránea
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      */
     public function down(): void
     {

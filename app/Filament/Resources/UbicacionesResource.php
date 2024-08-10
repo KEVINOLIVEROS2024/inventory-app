@@ -26,6 +26,8 @@ class UbicacionesResource extends Resource
                 //
                 Forms\Components\TextInput::make('ubicacion')
                 ->required(),
+                Forms\Components\TextInput::make('tipo')
+                ->required(),
             ]);
     }
 
@@ -36,6 +38,7 @@ class UbicacionesResource extends Resource
 
                 //
                 Tables\Columns\TextColumn::make('ubicacion'),
+                Tables\Columns\TextColumn::make('tipo'),
             ])
             ->filters([
                 //

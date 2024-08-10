@@ -4,10 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivosResource\Pages;
 use App\Filament\Resources\ActivosResource\RelationManagers;
+use App\Livewire\DynamicLocationSelector;
 use App\Models\Activos;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use App\Models\Ubicaciones;
+use App\Models\Sububicaciones;
+
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -46,10 +50,37 @@ class ActivosResource extends Resource
                 ->required(),
             Forms\Components\Select::make('sedes_id')
                 ->relationship('sede', 'sede'),
-            Forms\Components\Select::make('ubicaciones_id')
-                ->relationship('ubicacion', 'ubicacion'),
-            Forms\Components\Select::make('sububicaciones_id')
-                ->relationship('sububicacion', 'sububicacion'),
+            
+            
+
+                Forms\Components\Select::make('ubicacion_id')
+                ->label('Ubicación')
+                ->options(function () {
+                    return Ubicaciones::all()->pluck('ubicacion', 'id');
+                })
+                ->reactive()
+                ->afterStateUpdated(function (callable $set, $state) {
+                    // Limpiar el campo de sububicación al cambiar la ubicación
+                    $set('sububicacion_id', null);
+                }),
+
+            Forms\Components\Select::make('sububicacion_id')
+                ->label('Sububicación')
+                ->options(function (callable $get) {
+                    $ubicacionId = $get('ubicacion_id');
+                    return Sububicaciones::where('ubicacion_id', $ubicacionId)->pluck('sububicacion', 'id');
+                })
+                ->reactive()
+                ->disabled(fn($get) => !$get('ubicacion_id')), // Deshabilitar si no se ha seleccionado una ubicación
+        
+       
+       
+                 //Forms\Components\Select::make('ubicaciones_id')
+                 //->relationship('ubicacion', 'ubicacion'),
+                 //Forms\Components\Select::make('sububicaciones_id')
+                 //->relationship('sububicacion', 'sububicacion'),
+
+
             Forms\Components\Select::make('users_id')
                 ->relationship('user', 'name'),
             Forms\Components\Select::make('categorias_id')

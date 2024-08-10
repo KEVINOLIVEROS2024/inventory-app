@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('ubicaciones', function (Blueprint $table) {
             $table->id();
             $table->string('ubicacion');
+            $table->enum('tipo', ['edificio', 'bloque']); // Tipo de ubicación
             $table->timestamps();
+        
         });
     }
 

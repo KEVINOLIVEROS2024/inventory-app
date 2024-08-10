@@ -13,4 +13,9 @@ class Sububicaciones extends Model
     {
         return $this->hasMany(Activo::class, 'sububicaciones_id');
     }
+
+    public function ubicacion()
+    {
+        return $this->belongsTo(Ubicacion::class);
+    }
 }
