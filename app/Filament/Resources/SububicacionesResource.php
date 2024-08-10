@@ -26,6 +26,8 @@ class SububicacionesResource extends Resource
                 //
                 Forms\Components\TextInput::make('sububicacion')
                 ->required(),
+                Forms\Components\TextInput::make('ubicacion_id')
+                ->required(),
             ]);
     }
 

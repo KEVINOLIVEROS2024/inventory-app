@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sububicaciones extends Model
 {
-    use HasFactory;protected $fillable = ['sububicacion'];
+    use HasFactory;protected $fillable = ['sububicacion', 'ubicacion_id'];
 
     public function activos()
     {
         return $this->hasMany(Activo::class, 'sububicaciones_id');
     }
 
-    public function ubicacion()
+    public function ubicaciones()
     {
         return $this->belongsTo(Ubicacion::class);
     }
