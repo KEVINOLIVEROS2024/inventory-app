@@ -5,6 +5,9 @@ namespace App\Filament\Resources\ActivosResource\Pages;
 use App\Filament\Resources\ActivosResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Actions\Action;
+
+
 
 class ListActivos extends ListRecords
 {
@@ -16,4 +19,6 @@ class ListActivos extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+
 }

@@ -11,6 +11,11 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use App\Models\Ubicaciones;
 use App\Models\Sububicaciones;
+use App\Livewire\ActivoDetailsModal;
+
+
+
+
 
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -110,6 +115,8 @@ class ActivosResource extends Resource
                 ->relationship('proveedor', 'proveedor'),
             Forms\Components\DatePicker::make('garantia'),
             Forms\Components\Textarea::make('notas_activos'),
+
+      
             
             ]);
     }
@@ -144,6 +151,9 @@ class ActivosResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+            
+
+                                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
