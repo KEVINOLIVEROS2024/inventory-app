@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2024 a las 23:27:04
+-- Tiempo de generación: 12-08-2024 a las 23:09:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -37,7 +37,7 @@ CREATE TABLE `activos` (
   `fecha_lanzamiento` date NOT NULL,
   `fecha_compra` date NOT NULL,
   `valor` decimal(15,2) NOT NULL,
-  `estado` varchar(255) NOT NULL,
+  `estados_id` bigint(20) UNSIGNED NOT NULL,
   `sedes_id` bigint(20) UNSIGNED NOT NULL,
   `ubicaciones_id` bigint(20) UNSIGNED NOT NULL,
   `sububicaciones_id` bigint(20) UNSIGNED NOT NULL,
@@ -45,7 +45,8 @@ CREATE TABLE `activos` (
   `categorias_id` bigint(20) UNSIGNED NOT NULL,
   `proveedores_id` bigint(20) UNSIGNED NOT NULL,
   `garantia` date DEFAULT NULL,
-  `notas_activos` text DEFAULT NULL,
+  `mantenimientos` varchar(255) DEFAULT NULL,
+  `observaciones` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -54,8 +55,8 @@ CREATE TABLE `activos` (
 -- Volcado de datos para la tabla `activos`
 --
 
-INSERT INTO `activos` (`id`, `tipo_de_activo`, `numero_activo`, `serial_activo`, `marca`, `modelo`, `fecha_lanzamiento`, `fecha_compra`, `valor`, `estado`, `sedes_id`, `ubicaciones_id`, `sububicaciones_id`, `users_id`, `categorias_id`, `proveedores_id`, `garantia`, `notas_activos`, `created_at`, `updated_at`) VALUES
-(2, 'Portatil', '2024-2', 'MJ012345-2', 'Lenovo', 'M702024', '2021-10-25', '2023-02-10', 5000000.00, 'Activo', 2, 2, 2, 1, 1, 1, '2023-12-12', 'Registro Activo de prueba', '2024-08-10 02:11:09', '2024-08-10 02:16:11');
+INSERT INTO `activos` (`id`, `tipo_de_activo`, `numero_activo`, `serial_activo`, `marca`, `modelo`, `fecha_lanzamiento`, `fecha_compra`, `valor`, `estados_id`, `sedes_id`, `ubicaciones_id`, `sububicaciones_id`, `users_id`, `categorias_id`, `proveedores_id`, `garantia`, `mantenimientos`, `observaciones`, `created_at`, `updated_at`) VALUES
+(1, 'laptop', '1', '1', 'Lenovo', 'E14', '2020-12-12', '2021-01-30', 8000000.00, 2, 2, 1, 8, 1, 1, 2, '2024-12-12', '1', 'no', '2024-08-13 02:06:41', '2024-08-13 02:07:06');
 
 -- --------------------------------------------------------
 
@@ -74,8 +75,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1723234750),
-('a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1723234750;', 1723234750);
+('a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1723489083),
+('a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1723489083;', 1723489083);
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,33 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `categoria`, `created_at`, `updated_at`) VALUES
-(1, 'Laptop', '2024-08-10 01:24:44', '2024-08-10 01:24:44');
+(1, 'Laptop', '2024-08-12 23:57:41', '2024-08-12 23:57:41'),
+(2, 'Impresora', '2024-08-12 23:58:00', '2024-08-12 23:58:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estados`
+--
+
+CREATE TABLE `estados` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `estado` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estados`
+--
+
+INSERT INTO `estados` (`id`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Activo', '2024-08-12 23:57:11', '2024-08-12 23:57:11'),
+(2, 'Inactivo', '2024-08-12 23:58:11', '2024-08-12 23:58:11'),
+(3, 'En Uso', '2024-08-12 23:58:17', '2024-08-12 23:58:17'),
+(4, 'Dañado', '2024-08-12 23:58:29', '2024-08-12 23:58:29'),
+(5, 'En bodega', '2024-08-12 23:58:34', '2024-08-12 23:58:34'),
+(6, 'Renting', '2024-08-12 23:58:42', '2024-08-12 23:58:42');
 
 -- --------------------------------------------------------
 
@@ -186,7 +213,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2024_08_05_203515_create_sububicaciones_table', 1),
 (8, '2024_08_05_203555_create_categorias_table', 1),
 (9, '2024_08_05_203610_create_proveedores_table', 1),
-(10, '2024_08_08_181054_create_activos_table', 1);
+(10, '2024_08_12_174321_create_estados_table', 1),
+(11, '2024_08_12_182601_create_activos_table', 1),
+(12, '2024_08_12_193855_change_mantenimientos_column_type_in_activos_table', 2),
+(13, '2024_08_12_201218_remove_serial_activo_and_numero_activo_from_activos_table', 3),
+(14, '2024_08_12_201509_add_serial_activo_and_numero_activo_to_activos_table', 4),
+(15, '2024_08_12_202230_add_serial_activo_and_numero_activo_to_activos_table', 5),
+(16, '2024_08_12_210322_create_activos_table', 6),
+(17, '2024_08_12_210606_change_mantenimientos_column_type_in_activos_table', 7);
 
 -- --------------------------------------------------------
 
@@ -237,7 +271,8 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id`, `proveedor`, `direccion`, `telefono`, `correo`, `paginaweb`, `created_at`, `updated_at`) VALUES
-(1, 'QUALITY', 'NORTE', '3022085076', 'QUALITY.COM', 'https://www.qccolombia.com/helpdesk/soporte-tecnico-4/submit', '2024-08-10 01:25:03', '2024-08-10 01:25:03');
+(1, 'QUALITY', 'NORTE', '3', 'QUALITY.COM', 'https://www.qccolombia.com/helpdesk/soporte-tecnico-4/submit', '2024-08-12 23:59:11', '2024-08-12 23:59:11'),
+(2, 'Lenovo', 'USA', '3', 'lenovosporte@lenovo.com', 'www.lenovo.com', '2024-08-12 23:59:41', '2024-08-12 23:59:41');
 
 -- --------------------------------------------------------
 
@@ -260,9 +295,9 @@ CREATE TABLE `sedes` (
 --
 
 INSERT INTO `sedes` (`id`, `ciudad`, `sede`, `direccion`, `telefono`, `created_at`, `updated_at`) VALUES
-(1, 'Florencia', 'Florencia', 'NORTE', '3022085076', '2024-08-10 01:25:16', '2024-08-10 01:25:16'),
-(2, 'Bogota', 'Campus Norte', 'Calle209 ', '2042', '2024-08-10 02:11:54', '2024-08-10 02:11:54'),
-(3, 'Mocoa', 'Mocoa', 'Mocoa', '2', '2024-08-10 02:12:28', '2024-08-10 02:12:28');
+(1, 'Florencia', 'Florencia', 'Florencia', '1', '2024-08-12 23:59:56', '2024-08-12 23:59:56'),
+(2, 'Bogota', 'Campus Norte', 'Calle209 ', '3', '2024-08-13 00:00:04', '2024-08-13 00:00:04'),
+(3, 'Mocoa', 'Mocoa', 'Mocoa', '3', '2024-08-13 00:00:14', '2024-08-13 00:00:14');
 
 -- --------------------------------------------------------
 
@@ -284,7 +319,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('o6qORqgCul9CrLjk7eNjeWD9qUuGSzNbB1CfDEVh', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoid2FnUzFnTURsZWVER2x2VHVxQTBQU0lIZHUwY2xJTzBpbXNIOUtzaiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWN0aXZvcy8yL2VkaXQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTIkNE84bGNGZmZadE42YnNvNG50d2FvT2FvNGE2MmtmTEpBVG1JWGdwdVpTL0oxazRmT250Y3EiO3M6ODoiZmlsYW1lbnQiO2E6MDp7fX0=', 1723238677);
+('CONZNiqrvEiPhIL4siLbUgrdHOfzTKbWlzdWnUd5', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiakxHZm45SWxOdTVZN29VUHFvYmFKajNCMzRjYVQ3MWxsOGRnbHZsMyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM1OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWN0aXZvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMiQuT28yTjNvNUJsMjVMdk0vLmNQdmwuZDc1YTZ4Tk11cnVOY1FkV2VqYUlDakxnRk80SGVzUyI7czo4OiJmaWxhbWVudCI7YTowOnt9fQ==', 1723496834);
 
 -- --------------------------------------------------------
 
@@ -295,6 +330,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `sububicaciones` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `sububicacion` varchar(255) NOT NULL,
+  `ubicacion_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -303,9 +339,18 @@ CREATE TABLE `sububicaciones` (
 -- Volcado de datos para la tabla `sububicaciones`
 --
 
-INSERT INTO `sububicaciones` (`id`, `sububicacion`, `created_at`, `updated_at`) VALUES
-(1, 'Salon 109 ', '2024-08-10 01:25:25', '2024-08-10 01:25:25'),
-(2, 'Bodega', '2024-08-10 02:12:53', '2024-08-10 02:12:53');
+INSERT INTO `sububicaciones` (`id`, `sububicacion`, `ubicacion_id`, `created_at`, `updated_at`) VALUES
+(1, 'Rectoria', 1, '2024-08-13 00:01:00', '2024-08-13 00:01:00'),
+(2, 'Sala Sistemas', 3, '2024-08-13 00:01:18', '2024-08-13 00:42:44'),
+(3, 'Salon 214B', 3, '2024-08-13 00:01:35', '2024-08-13 00:01:35'),
+(4, 'Lab Sistemas', 3, '2024-08-13 00:01:48', '2024-08-13 00:01:48'),
+(5, 'Salon 209A', 2, '2024-08-13 00:02:04', '2024-08-13 00:02:04'),
+(6, 'Vicerrectoria', 1, '2024-08-13 00:02:13', '2024-08-13 00:02:13'),
+(7, 'Soporte Sistemas', 3, '2024-08-13 00:02:28', '2024-08-13 00:02:28'),
+(8, 'Gestion Humana', 1, '2024-08-13 00:02:37', '2024-08-13 00:02:37'),
+(9, 'Primero Piso', 4, '2024-08-13 00:02:48', '2024-08-13 00:02:48'),
+(10, 'Segundo Piso', 4, '2024-08-13 00:02:55', '2024-08-13 00:02:55'),
+(11, 'Tercer Piso', 4, '2024-08-13 00:03:05', '2024-08-13 00:03:05');
 
 -- --------------------------------------------------------
 
@@ -316,6 +361,7 @@ INSERT INTO `sububicaciones` (`id`, `sububicacion`, `created_at`, `updated_at`) 
 CREATE TABLE `ubicaciones` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ubicacion` varchar(255) NOT NULL,
+  `tipo` enum('edificio','bloque') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -324,9 +370,11 @@ CREATE TABLE `ubicaciones` (
 -- Volcado de datos para la tabla `ubicaciones`
 --
 
-INSERT INTO `ubicaciones` (`id`, `ubicacion`, `created_at`, `updated_at`) VALUES
-(1, 'Bloque A', '2024-08-10 01:25:34', '2024-08-10 01:25:34'),
-(2, 'Sistemas', '2024-08-10 02:12:41', '2024-08-10 02:12:41');
+INSERT INTO `ubicaciones` (`id`, `ubicacion`, `tipo`, `created_at`, `updated_at`) VALUES
+(1, 'Edificio Administrativo', 'edificio', '2024-08-13 00:00:25', '2024-08-13 00:00:25'),
+(2, 'Bloque A', 'bloque', '2024-08-13 00:00:31', '2024-08-13 00:00:31'),
+(3, 'Bloque B', 'bloque', '2024-08-13 00:00:39', '2024-08-13 00:00:39'),
+(4, 'Biblioteca', 'edificio', '2024-08-13 00:00:49', '2024-08-13 00:00:49');
 
 -- --------------------------------------------------------
 
@@ -350,7 +398,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'kevin', 'kevin@emprocs.com', NULL, '$2y$12$4O8lcFffZtN6bso4ntwaoOao4a62kfLJATmIXgpuZS/J1k4fOntcq', NULL, '2024-08-10 01:18:01', '2024-08-10 01:18:01');
+(1, 'kevin', 'kevin@emp.com', NULL, '$2y$12$.Oo2N3o5Bl25LvM/.cPvl.d75a6xNMuruNcQdWejaICjLgFO4HesS', NULL, '2024-08-12 23:56:51', '2024-08-12 23:56:51');
 
 --
 -- Índices para tablas volcadas
@@ -361,8 +409,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 ALTER TABLE `activos`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `activos_numero_activo_unique` (`numero_activo`),
-  ADD UNIQUE KEY `activos_serial_activo_unique` (`serial_activo`),
+  ADD KEY `activos_estados_id_foreign` (`estados_id`),
   ADD KEY `activos_sedes_id_foreign` (`sedes_id`),
   ADD KEY `activos_ubicaciones_id_foreign` (`ubicaciones_id`),
   ADD KEY `activos_sububicaciones_id_foreign` (`sububicaciones_id`),
@@ -386,6 +433,12 @@ ALTER TABLE `cache_locks`
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `estados`
+--
+ALTER TABLE `estados`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -450,7 +503,8 @@ ALTER TABLE `sessions`
 -- Indices de la tabla `sububicaciones`
 --
 ALTER TABLE `sububicaciones`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sububicaciones_ubicacion_id_foreign` (`ubicacion_id`);
 
 --
 -- Indices de la tabla `ubicaciones`
@@ -473,13 +527,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `activos`
 --
 ALTER TABLE `activos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `estados`
+--
+ALTER TABLE `estados`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -497,7 +557,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -509,7 +569,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `sedes`
@@ -521,13 +581,13 @@ ALTER TABLE `sedes`
 -- AUTO_INCREMENT de la tabla `sububicaciones`
 --
 ALTER TABLE `sububicaciones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicaciones`
 --
 ALTER TABLE `ubicaciones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -544,11 +604,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `activos`
   ADD CONSTRAINT `activos_categorias_id_foreign` FOREIGN KEY (`categorias_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `activos_estados_id_foreign` FOREIGN KEY (`estados_id`) REFERENCES `estados` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_proveedores_id_foreign` FOREIGN KEY (`proveedores_id`) REFERENCES `proveedores` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_sedes_id_foreign` FOREIGN KEY (`sedes_id`) REFERENCES `sedes` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_sububicaciones_id_foreign` FOREIGN KEY (`sububicaciones_id`) REFERENCES `sububicaciones` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_ubicaciones_id_foreign` FOREIGN KEY (`ubicaciones_id`) REFERENCES `ubicaciones` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `sububicaciones`
+--
+ALTER TABLE `sububicaciones`
+  ADD CONSTRAINT `sububicaciones_ubicacion_id_foreign` FOREIGN KEY (`ubicacion_id`) REFERENCES `ubicaciones` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
