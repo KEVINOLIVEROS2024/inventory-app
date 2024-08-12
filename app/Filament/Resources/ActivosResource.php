@@ -6,21 +6,18 @@ use App\Filament\Resources\ActivosResource\Pages;
 use App\Filament\Resources\ActivosResource\RelationManagers;
 use App\Livewire\DynamicLocationSelector;
 use App\Models\Activos;
+use App\Models\Estados;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use App\Models\Ubicaciones;
 use App\Models\Sububicaciones;
 use App\Livewire\ActivoDetailsModal;
-
-
-
-
-
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\DatePicker;
 
 class ActivosResource extends Resource
 {
@@ -35,11 +32,9 @@ class ActivosResource extends Resource
                 Forms\Components\TextInput::make('tipo_de_activo')
                 ->required(),
             Forms\Components\TextInput::make('numero_activo')
-                ->unique()
                 ->required(),
             Forms\Components\TextInput::make('serial_activo')
-                ->unique()
-                ->required(),
+                 ->required(),
             Forms\Components\TextInput::make('marca')
                 ->required(),
             Forms\Components\TextInput::make('modelo')
@@ -51,10 +46,12 @@ class ActivosResource extends Resource
             Forms\Components\TextInput::make('valor')
                 ->numeric()
                 ->required(),
-            Forms\Components\TextInput::make('estado')
-                ->required(),
+           
             Forms\Components\Select::make('sedes_id')
                 ->relationship('sede', 'sede'),
+
+                Forms\Components\Select::make('estados_id')
+                ->relationship('estado', 'estado'),
           
                 
                 // Otros campos
@@ -114,7 +111,8 @@ class ActivosResource extends Resource
             Forms\Components\Select::make('proveedores_id')
                 ->relationship('proveedor', 'proveedor'),
             Forms\Components\DatePicker::make('garantia'),
-            Forms\Components\Textarea::make('notas_activos'),
+            Forms\Components\Textarea::make('mantenimientos'),
+            Forms\Components\Textarea::make('observaciones'),
 
       
             
@@ -134,7 +132,7 @@ class ActivosResource extends Resource
                 Tables\Columns\TextColumn::make('fecha_lanzamiento'),
                 Tables\Columns\TextColumn::make('fecha_compra'),
                 Tables\Columns\TextColumn::make('valor'),
-                Tables\Columns\TextColumn::make('estado'),
+                Tables\Columns\TextColumn::make('estado.estado'),
                 Tables\Columns\TextColumn::make('sede.sede'),
                 Tables\Columns\TextColumn::make('ubicacion.ubicacion'),
                 Tables\Columns\TextColumn::make('sububicacion.sububicacion'),
@@ -142,7 +140,12 @@ class ActivosResource extends Resource
                 Tables\Columns\TextColumn::make('categoria.categoria'),
                 Tables\Columns\TextColumn::make('proveedor.proveedor'),
                 Tables\Columns\TextColumn::make('garantia'),
-                Tables\Columns\TextColumn::make('notas_activos'),
+                Tables\Columns\TextColumn::make('mantenimientos'),
+                Tables\Columns\TextColumn::make('observaciones'),
+                Tables\Columns\TextColumn::make('created_at')
+                ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                ->dateTime(),
 
             ])
             ->filters([

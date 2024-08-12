@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activos', function (Blueprint $table) {
+            
             $table->id();
             $table->string('tipo_de_activo');
             $table->string('numero_activo');
@@ -21,17 +22,18 @@ return new class extends Migration
             $table->date('fecha_lanzamiento');
             $table->date('fecha_compra');
             $table->decimal('valor', 15, 2);
-            $table->string('estado');
+            $table->foreignId('estados_id')->constrained()->onDelete('cascade');
             $table->foreignId('sedes_id')->constrained()->onDelete('cascade');
             $table->foreignId('ubicaciones_id')->constrained()->onDelete('cascade');
             $table->foreignId('sububicaciones_id')->constrained()->onDelete('cascade');
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('users_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('categorias_id')->constrained()->onDelete('cascade');
             $table->foreignId('proveedores_id')->constrained()->onDelete('cascade');
             $table->date('garantia')->nullable();
-            $table->text('notas_activos')->nullable();
+            $table->date('mantenimientos')->nullable();
+            $table->text('observaciones')->nullable();
             $table->timestamps();
-          
+            
         });
     }
 

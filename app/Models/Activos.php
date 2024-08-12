@@ -17,7 +17,7 @@ class Activos extends Model
         'fecha_lanzamiento',
         'fecha_compra',
         'valor',
-        'estado',
+        'estados_id',
         'sedes_id',
         'ubicaciones_id',
         'sububicaciones_id',
@@ -25,7 +25,8 @@ class Activos extends Model
         'categorias_id',
         'proveedores_id',
         'garantia',
-        'notas_activos',
+        'mantenimientos',
+        'observaciones',
     ];
 
     public function sede()
@@ -56,5 +57,10 @@ class Activos extends Model
     public function proveedor()
     {
         return $this->belongsTo(Proveedores::class, 'proveedores_id');
+    }
+
+    public function Estado()
+    {
+        return $this->belongsTo(Estado::class, 'estados_id');
     }
 }
