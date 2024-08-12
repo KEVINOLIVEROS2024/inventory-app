@@ -105,14 +105,15 @@ class ActivosResource extends Resource
      
 
             Forms\Components\Select::make('users_id')
+                ->nullable()   
                 ->relationship('user', 'name'),
             Forms\Components\Select::make('categorias_id')
                 ->relationship('categoria', 'categoria'),
             Forms\Components\Select::make('proveedores_id')
                 ->relationship('proveedor', 'proveedor'),
             Forms\Components\DatePicker::make('garantia'),
-            Forms\Components\Textarea::make('mantenimientos'),
-            Forms\Components\Textarea::make('observaciones'),
+            Forms\Components\TextInput::make('mantenimientos'),
+            Forms\Components\TextInput::make('observaciones')->nullable(),
 
       
             
