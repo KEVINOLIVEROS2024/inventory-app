@@ -50,15 +50,35 @@ class ActivosResource extends Resource
                 ->required(),
             Forms\Components\Select::make('sedes_id')
                 ->relationship('sede', 'sede'),
-            
-            
-
-                Forms\Components\Select::make('ubicacion_id')
+          
+                
+                // Otros campos
+                Forms\Components\Select::make('ubicaciones_id')
+                    ->label('Ubicación')
+                    ->options(Ubicaciones::all()->pluck('ubicacion', 'id'))
+                    ->reactive()
+                    ->required()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $sububicaciones = Sububicaciones::where('ubicacion_id', $state)
+                            ->pluck('sububicacion', 'id')
+                            ->toArray();
+                        $set('sububicaciones_id', $sububicaciones);
+                    }),
+                Forms\Components\Select::make('sububicaciones_id')
+                    ->label('Sububicación')
+                    ->options(fn($get) => Sububicaciones::where('ubicacion_id', $get('ubicaciones_id'))
+                        ->pluck('sububicacion', 'id')
+                        ->toArray())
+                    ->required(),
+                // Otros campos
+                
+                /*Forms\Components\Select::make('ubicacion_id')
                 ->label('Ubicación')
                 ->options(function () {
                     return Ubicaciones::all()->pluck('ubicacion', 'id');
                 })
                 ->reactive()
+                ->required()
                 ->afterStateUpdated(function (callable $set, $state) {
                     // Limpiar el campo de sububicación al cambiar la ubicación
                     $set('sububicacion_id', null);
@@ -72,7 +92,7 @@ class ActivosResource extends Resource
                 })
                 ->reactive()
                 ->disabled(fn($get) => !$get('ubicacion_id')), // Deshabilitar si no se ha seleccionado una ubicación
-        
+                */
        
        
                  //Forms\Components\Select::make('ubicaciones_id')
@@ -80,6 +100,7 @@ class ActivosResource extends Resource
                  //Forms\Components\Select::make('sububicaciones_id')
                  //->relationship('sububicacion', 'sububicacion'),
 
+     
 
             Forms\Components\Select::make('users_id')
                 ->relationship('user', 'name'),

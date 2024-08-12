@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SububicacionesResource\Pages;
 use App\Filament\Resources\SububicacionesResource\RelationManagers;
 use App\Models\Sububicaciones;
+use App\Models\Ubicaciones;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,9 +26,13 @@ class SububicacionesResource extends Resource
             ->schema([
                 //
                 Forms\Components\TextInput::make('sububicacion')
-                ->required(),
-                Forms\Components\TextInput::make('ubicacion_id')
-                ->required(),
+                    ->required()
+                    ->maxLength(255),
+                
+                Forms\Components\Select::make('ubicacion_id')
+                    ->label('Ubicación')
+                    ->options(Ubicaciones::all()->pluck('ubicacion', 'id'))
+                    ->required(),
             ]);
     }
 
@@ -37,6 +42,10 @@ class SububicacionesResource extends Resource
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('sububicacion'),
+            
+                
+                
+              
             ])
             ->filters([
                 //

@@ -8,24 +8,23 @@ use App\Models\Sububicaciones;
 
 class DynamicLocationSelector extends Component
 {
+
+
     public $ubicaciones;
-    public $sububicaciones;
-    public $selectedTipo = null;
-    public $selectedUbicacion = null;
-    public $selectedSububicacion = null;
+    public $sububicaciones = []; // Debe ser un array
+    public $selectedUbicacion;
 
     public function mount()
     {
-        $this->ubicaciones = Ubicaciones::all();
-        $this->sububicaciones = collect(); // Inicialmente vacío
+        $this->ubicaciones = Ubicacion::all();
     }
 
     public function updatedSelectedUbicacion($ubicacionId)
     {
-        $this->sububicaciones = Sububicaciones::where('ubicacion_id', $ubicacionId)->get();
-        $this->selectedSububicacion = null; // Limpiar selección anterior
+        $this->sububicaciones = Sububicacion::where('ubicacion_id', $ubicacionId)
+            ->pluck('sububicacion', 'id')
+            ->toArray(); // Convertir a array
     }
-
 
     public function render()
     {

@@ -17,6 +17,6 @@ class Ubicaciones extends Model
 
     public function sububicaciones()
     {
-        return $this->hasMany(Sububicacion::class);
+        return $this->hasMany(Sububicacion::class, 'ubicacion_id');
     }
 }

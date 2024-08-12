@@ -1,24 +1,18 @@
+<!-- resources/views/livewire/dynamic-location-selector.blade.php -->
 <div>
-    <label for="tipo">Selecciona tipo de ubicación:</label>
-    <select id="tipo" wire:model="selectedTipo">
-        <option value="">Selecciona tipo</option>
-        <option value="edificio">Edificio</option>
-        <option value="bloque">Bloque</option>
-    </select>
-
     <label for="ubicacion">Selecciona una ubicación:</label>
-    <select id="ubicacion" wire:model="selectedUbicacion" wire:loading.attr="disabled">
+    <select id="ubicacion" wire:model="selectedUbicacion">
         <option value="">Selecciona una ubicación</option>
-        @foreach($ubicaciones->where('tipo', $selectedTipo) as $ubicacion)
-            <option value="{{ $ubicacion->id }}">{{ $ubicacion->nombre }}</option>
+        @foreach($ubicaciones as $ubicacion)
+            <option value="{{ $ubicacion->id }}">{{ $ubicacion->ubicacion }}</option>
         @endforeach
     </select>
 
     <label for="sububicacion">Selecciona una sububicación:</label>
-    <select id="sububicacion" wire:model="selectedSububicacion" wire:loading.attr="disabled">
+    <select id="sububicacion" wire:model="selectedSububicacion">
         <option value="">Selecciona una sububicación</option>
-        @foreach($sububicaciones as $sububicacion)
-            <option value="{{ $sububicacion->id }}">{{ $sububicacion->nombre }}</option>
+        @foreach($sububicaciones as $id => $sububicacion)
+            <option value="{{ $id }}">{{ $sububicacion }}</option>
         @endforeach
     </select>
 </div>

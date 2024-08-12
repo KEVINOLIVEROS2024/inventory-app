@@ -24,10 +24,26 @@ class UbicacionesResource extends Resource
         return $form
             ->schema([
                 //
+               /* Forms\Components\TextInput::make('ubicacion')
+                ->required(),
+                Forms\Components\Select::make('tipo')
+                ->required(),
+*/
+
+
                 Forms\Components\TextInput::make('ubicacion')
-                ->required(),
-                Forms\Components\TextInput::make('tipo')
-                ->required(),
+                ->required()
+                ->maxLength(255)
+                ->label('Ubicación'),
+
+                Forms\Components\Select::make('tipo')
+                ->options([
+                    'edificio' => 'Edificio',
+                    'bloque' => 'Bloque',
+                ])
+                ->required()
+                ->placeholder('Selecciona un tipo')
+                ->label('Tipo de Ubicación'),
             ]);
     }
 

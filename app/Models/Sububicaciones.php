@@ -16,6 +16,6 @@ class Sububicaciones extends Model
 
     public function ubicaciones()
     {
-        return $this->belongsTo(Ubicacion::class);
+        return $this->belongsTo(Ubicacion::class, 'ubicacion_id');
     }
 }
