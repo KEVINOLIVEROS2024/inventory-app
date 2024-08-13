@@ -19,6 +19,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\DatePicker;
+use Illuminate\Support\Facades\Http;
+use App\Models\User;
 
 class ActivosResource extends Resource
 {
@@ -75,9 +77,23 @@ class ActivosResource extends Resource
                     ->required(),
 
 
-                Forms\Components\Select::make('users_id')
+                /*Forms\Components\Select::make('users_id')
                     ->nullable()
-                    ->relationship('user', 'name'),
+                    ->relationship('user', 'name'), */
+                // Campo TextInput para búsqueda de usuarios
+
+                // Campo Select para buscar y seleccionar usuario
+                
+                Forms\Components\Select::make('users_id')
+                    ->label('Usuario')
+                    ->options(function () {
+                        return User::all()->pluck('name', 'id');
+                    })
+                    ->searchable()
+                    ->placeholder('Seleccione un usuario'),
+                
+
+
                 Forms\Components\Select::make('categorias_id')
                     ->relationship('categoria', 'categoria'),
                 Forms\Components\Select::make('proveedores_id')
