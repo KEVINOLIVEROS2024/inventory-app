@@ -7,6 +7,7 @@ use App\Filament\Resources\ActivosResource\RelationManagers;
 use App\Livewire\DynamicLocationSelector;
 use App\Models\Activos;
 use App\Models\Estados;
+use App\Models\Comments;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -115,7 +116,21 @@ class ActivosResource extends Resource
             Forms\Components\TextInput::make('mantenimientos'),
             Forms\Components\TextInput::make('observaciones')->nullable(),
 
-      
+            //
+                Forms\Components\Select::make('users_id')
+                ->relationship('user', 'name')
+                ->required()
+                ->label('Ultimo Comentario'),
+
+                Forms\Components\Repeater::make('comment')
+                    ->relationship('comments')
+                    ->schema([
+                Forms\Components\Textarea::make('comment')
+                    ->required()
+                    ->label('Commentario'),
+                    ])
+                    ->columns(1),
+
             
             ]);
     }
@@ -147,6 +162,13 @@ class ActivosResource extends Resource
                 ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                 ->dateTime(),
+
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('comments.comment')
+                    ->label('Comentarios')
+                    ->limit(15),
+
+
 
             ])
             ->filters([

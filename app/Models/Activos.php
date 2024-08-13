@@ -63,4 +63,10 @@ class Activos extends Model
     {
         return $this->belongsTo(Estado::class, 'estados_id');
     }
+
+    // Define la relación uno a muchos con Comment
+    public function Comments()
+    {
+        return $this->hasMany(Comments::class, 'activo_id');
+    }
 }
