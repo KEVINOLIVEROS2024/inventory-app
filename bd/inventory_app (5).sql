@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2024 a las 23:09:33
+-- Tiempo de generación: 13-08-2024 a las 17:00:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -56,7 +56,8 @@ CREATE TABLE `activos` (
 --
 
 INSERT INTO `activos` (`id`, `tipo_de_activo`, `numero_activo`, `serial_activo`, `marca`, `modelo`, `fecha_lanzamiento`, `fecha_compra`, `valor`, `estados_id`, `sedes_id`, `ubicaciones_id`, `sububicaciones_id`, `users_id`, `categorias_id`, `proveedores_id`, `garantia`, `mantenimientos`, `observaciones`, `created_at`, `updated_at`) VALUES
-(1, 'laptop', '1', '1', 'Lenovo', 'E14', '2020-12-12', '2021-01-30', 8000000.00, 2, 2, 1, 8, 1, 1, 2, '2024-12-12', '1', 'no', '2024-08-13 02:06:41', '2024-08-13 02:07:06');
+(1, 'laptop', '1', '1', 'Lenovo', 'E14', '2020-12-12', '2021-01-30', 8000000.00, 2, 2, 4, 11, 2, 1, 2, '2024-12-12', '1', 'no', '2024-08-13 02:06:41', '2024-08-13 19:56:06'),
+(2, 'impresora', '2', '2', 'HP', 'HP1990', '2020-12-12', '2021-01-30', 10000000.00, 4, 2, 1, 6, 1, 2, 1, '2024-12-12', '1', 'no', '2024-08-13 19:54:36', '2024-08-13 19:54:36');
 
 -- --------------------------------------------------------
 
@@ -75,8 +76,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1723489083),
-('a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1723489083;', 1723489083);
+('a17961fa74e9275d529f489537f179c05d50c2f3', 'i:1;', 1723558987),
+('a17961fa74e9275d529f489537f179c05d50c2f3:timer', 'i:1723558987;', 1723558987);
 
 -- --------------------------------------------------------
 
@@ -110,6 +111,31 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` (`id`, `categoria`, `created_at`, `updated_at`) VALUES
 (1, 'Laptop', '2024-08-12 23:57:41', '2024-08-12 23:57:41'),
 (2, 'Impresora', '2024-08-12 23:58:00', '2024-08-12 23:58:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `activo_id` bigint(20) UNSIGNED NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id`, `activo_id`, `comment`, `created_at`, `updated_at`) VALUES
+(20, 2, 'compra', '2024-08-13 19:54:36', '2024-08-13 19:54:36'),
+(22, 2, 'Mantenimiento 1', '2024-08-13 19:56:28', '2024-08-13 19:56:28'),
+(23, 1, '1', '2024-08-13 19:58:36', '2024-08-13 19:58:36'),
+(24, 1, '2', '2024-08-13 19:58:36', '2024-08-13 19:58:36'),
+(25, 1, '3', '2024-08-13 19:58:36', '2024-08-13 19:58:36');
 
 -- --------------------------------------------------------
 
@@ -220,7 +246,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2024_08_12_201509_add_serial_activo_and_numero_activo_to_activos_table', 4),
 (15, '2024_08_12_202230_add_serial_activo_and_numero_activo_to_activos_table', 5),
 (16, '2024_08_12_210322_create_activos_table', 6),
-(17, '2024_08_12_210606_change_mantenimientos_column_type_in_activos_table', 7);
+(17, '2024_08_12_210606_change_mantenimientos_column_type_in_activos_table', 7),
+(18, '2024_08_12_215139_create_comentarios_table', 8);
 
 -- --------------------------------------------------------
 
@@ -319,7 +346,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('CONZNiqrvEiPhIL4siLbUgrdHOfzTKbWlzdWnUd5', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiakxHZm45SWxOdTVZN29VUHFvYmFKajNCMzRjYVQ3MWxsOGRnbHZsMyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM1OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWN0aXZvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMiQuT28yTjNvNUJsMjVMdk0vLmNQdmwuZDc1YTZ4Tk11cnVOY1FkV2VqYUlDakxnRk80SGVzUyI7czo4OiJmaWxhbWVudCI7YTowOnt9fQ==', 1723496834);
+('2JOIsiUEZGyApALj7BeoyPSfbmCfDE0h1Ta0utvC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiMzRCQ0prdUJqUlVmZWQycnhZQlJjYVYxdFVpYnBVcnZ1eW11SXpNQyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM1OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWN0aXZvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMiQuT28yTjNvNUJsMjVMdk0vLmNQdmwuZDc1YTZ4Tk11cnVOY1FkV2VqYUlDakxnRk80SGVzUyI7czo4OiJmaWxhbWVudCI7YTowOnt9fQ==', 1723561188);
 
 -- --------------------------------------------------------
 
@@ -398,7 +425,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'kevin', 'kevin@emp.com', NULL, '$2y$12$.Oo2N3o5Bl25LvM/.cPvl.d75a6xNMuruNcQdWejaICjLgFO4HesS', NULL, '2024-08-12 23:56:51', '2024-08-12 23:56:51');
+(1, 'kevin', 'kevin@emp.com', NULL, '$2y$12$.Oo2N3o5Bl25LvM/.cPvl.d75a6xNMuruNcQdWejaICjLgFO4HesS', NULL, '2024-08-12 23:56:51', '2024-08-12 23:56:51'),
+(2, 'Pedro', 'pedro@emp.com', NULL, '$2y$12$o5MwiGHHI7MN8EgFKCanYOhI3nRCjfRFM4tay6teCU5MbNGgQOFuW', NULL, '2024-08-13 19:55:37', '2024-08-13 19:55:37');
 
 --
 -- Índices para tablas volcadas
@@ -434,6 +462,13 @@ ALTER TABLE `cache_locks`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_activo_id_foreign` (`activo_id`);
 
 --
 -- Indices de la tabla `estados`
@@ -527,13 +562,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `activos`
 --
 ALTER TABLE `activos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -557,7 +598,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -593,7 +634,7 @@ ALTER TABLE `ubicaciones`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -610,6 +651,12 @@ ALTER TABLE `activos`
   ADD CONSTRAINT `activos_sububicaciones_id_foreign` FOREIGN KEY (`sububicaciones_id`) REFERENCES `sububicaciones` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_ubicaciones_id_foreign` FOREIGN KEY (`ubicaciones_id`) REFERENCES `ubicaciones` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `activos_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_activo_id_foreign` FOREIGN KEY (`activo_id`) REFERENCES `activos` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `sububicaciones`
