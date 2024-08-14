@@ -6,6 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Models\Contracts\FilamentUser;
+
+
+
 
 class User extends Authenticatable
 {
@@ -49,5 +55,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Activo::class, 'users_id');
     }   
+
+    use HasRoles;
+    use HasPanelShield;
+   
+
+    // Otros métodos y propiedades del modelo...
+    
     
 }

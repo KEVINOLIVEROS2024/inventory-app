@@ -4,10 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+use Rmsramos\Activitylog\RelationManagers\ActivitylogRelationManager;
+use Rmsramos\Activitylog\Actions\ActivityLogTimelineTableAction;
+
+
+
+
 
 class Activos extends Model
 {
+
+    
     use HasFactory;
+    use LogsActivity;
+
     protected $fillable = [
         'tipo_de_activo',
         'numero_activo',
@@ -27,7 +39,32 @@ class Activos extends Model
         'garantia',
         'mantenimientos',
         'observaciones',
+
+    
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['tipo_de_activo',
+        'numero_activo',
+        'serial_activo',
+        'marca',
+        'modelo',
+        'fecha_lanzamiento',
+        'fecha_compra',
+        'valor',
+        'estados_id',
+        'sedes_id',
+        'ubicaciones_id',
+        'sububicaciones_id',
+        'users_id',
+        'categorias_id',
+        'proveedores_id',
+        'garantia',
+        'mantenimientos',
+        'observaciones',]);
+    }
 
     public function sede()
     {

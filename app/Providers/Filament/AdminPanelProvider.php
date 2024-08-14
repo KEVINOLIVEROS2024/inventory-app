@@ -17,6 +17,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Rmsramos\Activitylog\ActivitylogPlugin;
+
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,6 +56,22 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                ActivitylogPlugin::make()
+                ->navigationGroup('Activity Log')
+                ->navigationIcon('heroicon-o-shield-check')
+                ->navigationCountBadge(true)
+                ->navigationSort(2)
+                ->authorize(
+                    fn () => auth()->user()->id === 1
+                ),
+
+                
             ]);
+
+            
     }
 }

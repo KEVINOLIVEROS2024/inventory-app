@@ -24,6 +24,7 @@ class CommentsResource extends Resource
         return $form
             ->schema([
                 //
+
             ]);
     }
 
@@ -32,6 +33,7 @@ class CommentsResource extends Resource
         return $table
             ->columns([
                 //
+
             ])
             ->filters([
                 //

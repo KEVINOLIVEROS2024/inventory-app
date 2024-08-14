@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\Facades\Http;
 use App\Models\User;
+use Rmsramos\Activitylog\RelationManagers\ActivitylogRelationManager;
+use Rmsramos\Activitylog\Actions\ActivityLogTimelineTableAction;
+use Spatie\Activitylog\Traits\LogsActivity;
+ 
 
 class ActivosResource extends Resource
 {
@@ -163,6 +167,15 @@ class ActivosResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                ActivityLogTimelineTableAction::make('Activities')
+                ->timelineIcons([
+                    'created' => 'heroicon-m-check-badge',
+                    'updated' => 'heroicon-m-pencil-square',
+                ])
+                ->timelineIconColors([
+                    'created' => 'info',
+                    'updated' => 'warning',
+                ]),
 
 
 
@@ -178,6 +191,10 @@ class ActivosResource extends Resource
     {
         return [
             //
+            //ActivitylogRelationManager::class,
+            ActivitylogRelationManager::class,
+            
+            
         ];
     }
 
