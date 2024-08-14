@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Rmsramos\Activitylog\ActivitylogPlugin;
+use App\Filament\Resources\Activos;
 
 
 
@@ -61,6 +62,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 ActivitylogPlugin::make()
+                //->resource(\App\Filament\Resources\ActivosResource::class)
                 ->navigationGroup('Activity Log')
                 ->navigationIcon('heroicon-o-shield-check')
                 ->navigationCountBadge(true)

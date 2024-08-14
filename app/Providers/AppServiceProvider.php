@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Filament\PluginServiceProvider;
 use App\Filament\Resources\RoleResource;
+use App\Filament\Resources\Activos;
 use App\Filament\Resources\PermissionResource;
 use Rmsramos\Activitylog\ActivitylogPlugin;
 use Spatie\Activitylog\Models\Activity;
@@ -36,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        //Gate::policy(Activity::class, ActivityPolicy::class);
+        
 
     }
 
@@ -45,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         return $panel
             ->plugins([
                 ActivitylogPlugin::make()
+                //->resource(\App\Filament\Resources\ActivosResource::class)
                     ->label('Log')
                     ->pluralLabel('Logs')
                     ->navigationGroup('Activity Log')

@@ -14,6 +14,7 @@ class ActivityPolicy
     public function viewAny(User $user): bool
     {
         //
+        
     }
 
     /**
@@ -22,6 +23,7 @@ class ActivityPolicy
     public function view(User $user, Activity $activity): bool
     {
         //
+       
     }
 
     /**
@@ -30,6 +32,7 @@ class ActivityPolicy
     public function create(User $user): bool
     {
         //
+       
     }
 
     /**
@@ -38,6 +41,7 @@ class ActivityPolicy
     public function update(User $user, Activity $activity): bool
     {
         //
+       
     }
 
     /**
@@ -46,6 +50,7 @@ class ActivityPolicy
     public function delete(User $user, Activity $activity): bool
     {
         //
+       
     }
 
     /**
@@ -54,6 +59,7 @@ class ActivityPolicy
     public function restore(User $user, Activity $activity): bool
     {
         //
+        
     }
 
     /**
@@ -62,5 +68,6 @@ class ActivityPolicy
     public function forceDelete(User $user, Activity $activity): bool
     {
         //
+       
     }
 }
