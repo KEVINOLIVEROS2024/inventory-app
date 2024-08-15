@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -19,6 +20,9 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Rmsramos\Activitylog\ActivitylogPlugin;
 use App\Filament\Resources\Activos;
+
+
+use Spatie\Activitylog\Models\Activity;
 
 
 
@@ -62,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 ActivitylogPlugin::make()
-                //->resource(\App\Filament\Resources\ActivosResource::class)
+                //->resource(CustomActivitylogResource::class)
                 ->navigationGroup('Activity Log')
                 ->navigationIcon('heroicon-o-shield-check')
                 ->navigationCountBadge(true)
