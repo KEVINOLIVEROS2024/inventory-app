@@ -9,10 +9,11 @@ if (!function_exists('formatActivityDetails')) {
      */
     function formatActivityDetails(array $details): string
     {
-        $formatted = '';
+        $formatted = '<dl>'; // Lista de definición para mejor legibilidad
         foreach ($details as $key => $value) {
-            $formatted .= "<strong>$key:</strong> $value<br>";
+            $formatted .= "<dt><strong>$key:</strong></dt><dd>$value</dd>";
         }
+        $formatted .= '</dl>';
         return $formatted;
     }
 }
