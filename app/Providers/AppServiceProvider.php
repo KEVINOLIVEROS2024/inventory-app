@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Gate;
 
 
 
-
-
 class AppServiceProvider extends ServiceProvider
 
 {
