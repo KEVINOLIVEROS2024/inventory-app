@@ -31,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+        
             ->default()
             ->id('admin')
             ->path('admin')
@@ -73,10 +74,18 @@ class AdminPanelProvider extends PanelProvider
                 ->navigationSort(2)
                 ->authorize(
                     fn () => auth()->user()->id === 1
+                    
                 ),
+             
+
+      
+             
+                
 
                 
             ]);
+            
+            
 
             
     }

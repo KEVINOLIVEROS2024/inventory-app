@@ -46,7 +46,10 @@ class AppServiceProvider extends ServiceProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+        
             ->plugins([
+
+               
                 ActivitylogPlugin::make()
                 //->resource(CustomActivitylogResource::class)
                     ->label('Log')
@@ -58,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
                     ->authorize(
                         fn () => auth()->user()->id === 1
                     ),
+                    
             ]);
     }
 }

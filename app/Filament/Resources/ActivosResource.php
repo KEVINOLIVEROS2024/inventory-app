@@ -171,6 +171,7 @@ class ActivosResource extends Resource
                 ->timelineIcons([
                     'created' => 'heroicon-m-check-badge',
                     'updated' => 'heroicon-m-pencil-square',
+                    
                 ])
                 ->timelineIconColors([
                     'created' => 'info',
@@ -207,3 +208,5 @@ class ActivosResource extends Resource
         ];
     }
 }
+
+
