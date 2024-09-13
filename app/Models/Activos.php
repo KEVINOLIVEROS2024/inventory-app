@@ -8,18 +8,17 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Rmsramos\Activitylog\RelationManagers\ActivitylogRelationManager;
 use Rmsramos\Activitylog\Actions\ActivityLogTimelineTableAction;
+use OwenIt\Auditing\Auditable;
 
-
-
-
-
-class Activos extends Model
+class Activos extends Model implements \OwenIt\Auditing\Contracts\Auditable
 {
 
     
     use HasFactory;
     use LogsActivity;
-
+    use Auditable;
+  
+    
     protected $fillable = [
         'tipo_de_activo',
         'numero_activo',
@@ -46,7 +45,8 @@ class Activos extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['tipo_de_activo',
+        ->logOnly([
+        'tipo_de_activo',
         'numero_activo',
         'serial_activo',
         'marca',
@@ -105,5 +105,35 @@ class Activos extends Model
     public function Comments()
     {
         return $this->hasMany(Comments::class, 'activo_id');
+    }
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        $sede = $this->sede ? $this->sede->sede : 'No especificada';
+        $ubicacion = $this->ubicacion ? $this->ubicacion->ubicacion : 'No especificada';
+        $sububicacion = $this->sububicacion ? $this->sububicacion->sububicacion : 'No especificada';
+        $estado = $this->estado ? $this->estado->estado : 'No especificado';
+        $user = $this->user ? $this->user->name : 'No especificado';
+        $categoria = $this->categoria ? $this->categoria->categoria : 'No especificada';
+        $proveedor = $this->proveedor ? $this->proveedor->proveedor : 'No especificado';
+
+        return "Los activos fueron actualizados por {$user}. Actualizado el: {$this->updated_at->format('d/m/Y H:i:s')}. Datos de actividad:
+        - Tipo de activo: {$this->tipo_de_activo}
+        - Número de activo: {$this->numero_activo}
+        - Serial de activo: {$this->serial_activo}
+        - Marca: {$this->marca}
+        - Modelo: {$this->modelo}
+        - Fecha de lanzamiento: {$this->fecha_lanzamiento}
+        - Fecha de compra: {$this->fecha_compra}
+        - Valor: {$this->valor}
+        - Estado: {$estado}
+        - Sede: {$sede}
+        - Ubicación: {$ubicacion}
+        - Sububicación: {$sububicacion}
+        - Categoría: {$categoria}
+        - Proveedor: {$proveedor}
+        - Garantía: {$this->garantia}
+        - Mantenimiento: {$this->mantenimientos}
+        - Observaciones: {$this->observaciones}";
     }
 }

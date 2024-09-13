@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdefc1478f97c223d1009a6b26b1d7fd",
+    "content-hash": "33599a070a158c8e6d1131f414e5a15d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1070,7 +1070,7 @@
         },
         {
             "name": "filament/actions",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
@@ -1123,7 +1123,7 @@
         },
         {
             "name": "filament/filament",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
@@ -1188,16 +1188,16 @@
         },
         {
             "name": "filament/forms",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "2f63e3f263c5940d8106fe15486a94350fdb7e98"
+                "reference": "99d72777f1e6dc5d42d936e7deb53148e4233ec3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/2f63e3f263c5940d8106fe15486a94350fdb7e98",
-                "reference": "2f63e3f263c5940d8106fe15486a94350fdb7e98",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/99d72777f1e6dc5d42d936e7deb53148e4233ec3",
+                "reference": "99d72777f1e6dc5d42d936e7deb53148e4233ec3",
                 "shasum": ""
             },
             "require": {
@@ -1240,11 +1240,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2024-09-11T08:25:28+00:00"
+            "time": "2024-09-12T12:27:13+00:00"
         },
         {
             "name": "filament/infolists",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
@@ -1295,7 +1295,7 @@
         },
         {
             "name": "filament/notifications",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -1347,7 +1347,7 @@
         },
         {
             "name": "filament/support",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
@@ -1406,7 +1406,7 @@
         },
         {
             "name": "filament/tables",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
@@ -1458,7 +1458,7 @@
         },
         {
             "name": "filament/widgets",
-            "version": "v3.2.111",
+            "version": "v3.2.112",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
@@ -2108,16 +2108,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.22.0",
+            "version": "v11.23.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "868c75beacc47d0f361b919bbc155c0b619bf3d5"
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/868c75beacc47d0f361b919bbc155c0b619bf3d5",
-                "reference": "868c75beacc47d0f361b919bbc155c0b619bf3d5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/08b46ae7be52f71688196f98556d21cb2ec799b6",
+                "reference": "08b46ae7be52f71688196f98556d21cb2ec799b6",
                 "shasum": ""
             },
             "require": {
@@ -2179,6 +2179,7 @@
                 "illuminate/bus": "self.version",
                 "illuminate/cache": "self.version",
                 "illuminate/collections": "self.version",
+                "illuminate/concurrency": "self.version",
                 "illuminate/conditionable": "self.version",
                 "illuminate/config": "self.version",
                 "illuminate/console": "self.version",
@@ -2221,7 +2222,7 @@
                 "league/flysystem-sftp-v3": "^3.0",
                 "mockery/mockery": "^1.6",
                 "nyholm/psr7": "^1.2",
-                "orchestra/testbench-core": "^9.1.5",
+                "orchestra/testbench-core": "^9.4.0",
                 "pda/pheanstalk": "^5.0",
                 "phpstan/phpstan": "^1.11.5",
                 "phpunit/phpunit": "^10.5|^11.0",
@@ -2279,6 +2280,7 @@
                     "src/Illuminate/Events/functions.php",
                     "src/Illuminate/Filesystem/functions.php",
                     "src/Illuminate/Foundation/helpers.php",
+                    "src/Illuminate/Log/functions.php",
                     "src/Illuminate/Support/helpers.php"
                 ],
                 "psr-4": {
@@ -2310,7 +2312,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-09-03T15:27:15+00:00"
+            "time": "2024-09-12T14:57:48+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -3871,6 +3873,94 @@
                 }
             ],
             "time": "2024-07-26T05:48:04+00:00"
+        },
+        {
+            "name": "owen-it/laravel-auditing",
+            "version": "v13.6.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/owen-it/laravel-auditing.git",
+                "reference": "28ecd2d5cc05c3619f99af42611877f54371af20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/28ecd2d5cc05c3619f99af42611877f54371af20",
+                "reference": "28ecd2d5cc05c3619f99af42611877f54371af20",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/filesystem": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "*",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.6|^10.5|^11.0"
+            },
+            "suggest": {
+                "irazasyed/larasupport": "Needed to publish the package configuration in Lumen"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v13-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "OwenIt\\Auditing\\AuditingServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenIt\\Auditing\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antério Vieira",
+                    "email": "anteriovieira@gmail.com"
+                },
+                {
+                    "name": "Raphael França",
+                    "email": "raphaelfrancabsb@gmail.com"
+                },
+                {
+                    "name": "Morten D. Hansen",
+                    "email": "morten@visia.dk"
+                }
+            ],
+            "description": "Audit changes of your Eloquent models in Laravel/Lumen",
+            "homepage": "https://laravel-auditing.com",
+            "keywords": [
+                "Accountability",
+                "Audit",
+                "auditing",
+                "changes",
+                "eloquent",
+                "history",
+                "laravel",
+                "log",
+                "logging",
+                "lumen",
+                "observer",
+                "record",
+                "revision",
+                "tracking"
+            ],
+            "support": {
+                "issues": "https://github.com/owen-it/laravel-auditing/issues",
+                "source": "https://github.com/owen-it/laravel-auditing"
+            },
+            "time": "2024-06-26T20:56:28+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -8034,16 +8124,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.31.3",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1"
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1",
-                "reference": "0a7e2891a85eba2d448a9ffc6fc5ce367e924bc1",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/4a7e41d280861ca7e35710cea011a07669b4003b",
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b",
                 "shasum": ""
             },
             "require": {
@@ -8093,7 +8183,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-09-03T20:05:33+00:00"
+            "time": "2024-09-11T20:14:29+00:00"
         },
         {
             "name": "mockery/mockery",

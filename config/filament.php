@@ -86,4 +86,9 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+    'path' => 'admin',
+    'middleware' => ['auth', 'check.role:super_admin'], // Aplica el middleware aquí
+    // Otras configuraciones
+
+  
 ];

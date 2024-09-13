@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Gate;
 
 
 
+
+
+
 class AppServiceProvider extends ServiceProvider
 
 {
@@ -39,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        
+
 
     }
 

@@ -9,13 +9,15 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
+use OwenIt\Auditing\Auditable;
 
 
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements \OwenIt\Auditing\Contracts\Auditable
 {
     use HasFactory, Notifiable;
+    use Auditable;
 
     /**
      * The attributes that are mass assignable.
