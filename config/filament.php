@@ -2,6 +2,8 @@
 
 return [
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Broadcasting
@@ -89,6 +91,13 @@ return [
     'path' => 'admin',
     'middleware' => ['auth', 'check.role:super_admin'], // Aplica el middleware aquí
     // Otras configuraciones
+
+'providers' => [
+    // Otros providers
+
+    App\Providers\FilamentServiceProvider::class,
+],
+
 
   
 ];

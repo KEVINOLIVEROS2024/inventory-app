@@ -1,0 +1,14 @@
+.filament-button {
+    background-color: #1D4ED8 !important; /* Color de fondo del botón */
+    border-color: #1D4ED8 !important;     /* Borde del botón */
+}
+
+.filament-button:hover {
+    background-color: #2563EB !important; /* Color al hacer hover */
+}
+
+.filament-sidebar {
+    background-color: #1D4ED8 !important; /* Cambiar color del sidebar */
+}
+
+/* Sobrescribe más clases según lo que quieras personalizar */

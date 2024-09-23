@@ -12,7 +12,8 @@ use Rmsramos\Activitylog\ActivitylogPlugin;
 use Spatie\Activitylog\Models\Activity;
 use App\Policies\ActivityPolicy;
 use Illuminate\Support\Facades\Gate;
-
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 
 
 
